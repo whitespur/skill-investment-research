@@ -1,101 +1,101 @@
 ---
 name: investment-research
-description: Comprehensive investment research for stocks, AI companies, and selected crypto assets using a structured 20-dimension scorecard. Use when the user wants a structured research report, scorecard-based analysis, valuation discussion, thesis/risk breakdown, or deep-dive investment memo on a specific company, ticker, sector, or theme.
+description: 面向股票、AI 公司与部分加密资产的结构化投研 skill，基于 20 维投资评分卡输出研究报告、估值分析、投资逻辑、风险拆解与深度 memo。Use when the user wants a structured research report, scorecard-based analysis, valuation discussion, thesis/risk breakdown, or deep-dive investment memo on a specific company, ticker, sector, or theme.
 ---
 
 # Investment Research Skill v2.4
 
-## Description
+## 说明
 
-Perform structured investment research using the **20-dimension scoring framework defined in this skill** as the default source of truth.
+使用本 skill 内定义的**20维投资评分框架**，完成结构化投研分析。
 
-This skill is for **single-name** or **single-theme** research work:
-- stock deep dives
-- AI company analysis
-- sector/theme mapping
-- valuation discussion
-- thesis / bear-case / risk review
+这个 skill 适用于**单标的**或**单主题**研究工作，例如：
+- 个股深度分析
+- AI 公司研究
+- 行业 / 主题映射
+- 估值讨论
+- 多空逻辑 / 风险复盘
 
-This skill focuses on **investment analysis only**.
-Document conversion/export tasks are out of scope.
+这个 skill **只负责分析**。
+文档导出、自动化监控、组合级追踪不属于它的职责范围。
 
-If the task is **continuous daily monitoring across a portfolio**, use a dedicated monitoring workflow rather than this one-off analysis skill.
-
----
-
-## Core Rule
-
-The canonical scoring framework is the 20-dimension framework documented in this skill.
-
-If the current workspace provides an explicit scoring config for the same framework, follow that config.
-Otherwise, use the weights and thresholds documented here as the source of truth.
+如果任务是**跨组合、连续、自动化**的监控型工作，应使用专门的监控工作流，而不是这个一次性分析 skill。
 
 ---
 
-## Workflows
+## 核心规则
 
-### 1. Quick Analysis
+默认以本 skill 中定义的 **20维评分框架** 作为分析基准。
 
-Use for fast research on one company/ticker.
-
-Do:
-- get recent news and key events
-- get current price / valuation snapshot
-- score the company with the 20-dimension framework
-- summarize thesis, risks, and current stage
-
-### 2. Deep Dive Analysis
-
-Use for a full investment memo.
-
-Do:
-- build event timeline
-- analyze business model and moat
-- evaluate industry position and cycle
-- evaluate valuation and historical valuation position
-- map risks, catalysts, and state transition
-- generate structured scorecard and final rating
-
-### 3. Theme / Sector Mapping
-
-Use when the user asks for sector comparison or industry-chain mapping.
-
-Do:
-- identify the theme and sub-themes
-- map leaders vs elastic names
-- explain which dimension(s) drive relative strength
-- avoid pretending this is equivalent to a live monitoring or watchlist automation system
+如果当前工作区明确提供了同一框架下的评分配置，则优先使用工作区配置。
+否则，以本 skill 中记录的权重、阈值和结构作为事实标准。
 
 ---
 
-## Core Analysis Framework (Latest 20-Dimension Scorecard)
+## 工作流
 
-Every serious equity-style report should use these 20 dimensions and weights.
+### 1. 快速分析
 
-| # | Dimension | Weight | What to judge |
-|---|-----------|--------|---------------|
-| 1 | `technical_moat` | 10% | Technical edge, architectural advantage, defensibility |
-| 2 | `business_model` | 7% | Revenue logic, monetization quality, customer value capture |
-| 3 | `revenue_growth` | 7% | Growth rate, growth quality, sustainability |
-| 4 | `profitability` | 7% | Margin structure, path to profit, unit economics |
-| 5 | `cash_flow` | 7% | Cash generation, runway, capital intensity |
-| 6 | `valuation_history` | 7% | Current valuation vs own history / historical percentile |
-| 7 | `geopolitics` | 7% | Geopolitical sensitivity, sanctions, war, cross-border risk |
-| 8 | `state_transition` | 6% | Whether the asset is moving from concept → infrastructure / core asset |
-| 9 | `valuation` | 6% | Absolute valuation vs peers / quality |
-| 10 | `industry_cycle` | 6% | Industry phase: bottom / upcycle / mature / downcycle |
-| 11 | `market_position` | 6% | Competitive position, share, bargaining power |
-| 12 | `investment_phase` | 5% | Which investment phase the company is in |
-| 13 | `moat_depth` | 5% | How deep and durable the moat really is |
-| 14 | `customer_structure` | 3% | Customer quality, concentration, stickiness |
-| 15 | `management` | 3% | Founder / management quality, execution credibility |
-| 16 | `policy` | 2% | Regulatory and policy support / drag |
-| 17 | `product_iteration` | 2% | Product cadence, iteration speed, roadmap execution |
-| 18 | `supply_chain` | 2% | Supply resilience, upstream/downstream control |
-| 19 | `shareholder` | 1% | Shareholder quality and alignment |
-| 20 | `analyst_consensus` | 1% | Sell-side positioning / consensus backdrop |
+适用于快速研究单个公司 / ticker。
 
-### Category Grouping
+要做：
+- 获取近期新闻和关键事件
+- 获取当前价格和估值快照
+- 用 20 维框架评分
+- 提炼投资逻辑、核心风险、当前阶段判断
+
+### 2. 深度分析
+
+适用于完整投资 memo。
+
+要做：
+- 构建事件时间线
+- 分析商业模式与护城河
+- 评估行业地位与周期位置
+- 评估估值与历史估值位置
+- 映射风险、催化剂与状态跃迁
+- 生成结构化评分卡与最终评级
+
+### 3. 主题 / 行业映射
+
+适用于用户要求行业对比、产业链梳理或主题映射时。
+
+要做：
+- 明确主题与子主题
+- 区分龙头与弹性标的
+- 解释相对强弱由哪些维度驱动
+- 不要把这种一次性分析伪装成实时监控或 watchlist 自动化系统
+
+---
+
+## 核心分析框架（20维评分卡）
+
+严肃的权益类研究，默认都应使用以下 20 个维度与权重。
+
+| # | 维度 | 权重 | 核心判断 |
+|---|------|------|----------|
+| 1 | `technical_moat` | 10% | 技术优势、架构领先性、防御性 |
+| 2 | `business_model` | 7% | 收入逻辑、变现质量、价值捕获 |
+| 3 | `revenue_growth` | 7% | 增长速度、增长质量、持续性 |
+| 4 | `profitability` | 7% | 利润结构、盈利路径、单位经济性 |
+| 5 | `cash_flow` | 7% | 现金创造能力、资本开支、跑道 |
+| 6 | `valuation_history` | 7% | 当前估值相对自身历史区间 |
+| 7 | `geopolitics` | 7% | 地缘政治、制裁、战争、跨境风险 |
+| 8 | `state_transition` | 6% | 是否处于概念 → 基建 / 核心资产跃迁 |
+| 9 | `valuation` | 6% | 绝对估值与同业比较 |
+| 10 | `industry_cycle` | 6% | 行业所处阶段：底部 / 上行 / 成熟 / 下行 |
+| 11 | `market_position` | 6% | 竞争地位、份额、议价能力 |
+| 12 | `investment_phase` | 5% | 当前投资阶段位置 |
+| 13 | `moat_depth` | 5% | 护城河深度与持续性 |
+| 14 | `customer_structure` | 3% | 客户质量、集中度、粘性 |
+| 15 | `management` | 3% | 创始人 / 管理层质量与执行力 |
+| 16 | `policy` | 2% | 监管与政策支持 / 拖累 |
+| 17 | `product_iteration` | 2% | 产品节奏、迭代速度、路线图兑现 |
+| 18 | `supply_chain` | 2% | 供应链韧性、上下游控制力 |
+| 19 | `shareholder` | 1% | 股东结构与利益一致性 |
+| 20 | `analyst_consensus` | 1% | 卖方一致预期与市场共识背景 |
+
+### 分类分组
 
 #### Quantitative
 - `valuation`
@@ -125,33 +125,33 @@ Every serious equity-style report should use these 20 dimensions and weights.
 
 ---
 
-## Rating Thresholds
+## 评级阈值
 
-Use these thresholds unless the user explicitly asks for a custom rubric.
+除非用户明确要求自定义标准，否则默认使用：
 
 - `Strong Buy`: `>= 8.0`
 - `Buy`: `>= 6.5`
 - `Hold`: `>= 4.5`
 - `Sell`: `< 4.5`
 
-Default missing dimension score:
+默认缺失维度分数：
 - `5.0`
 
 ---
 
-## Reporting Requirements
+## 报告要求
 
-For each research report, include:
+每份研究报告默认应包括：
 
 ### 1. Executive Summary
-- one-paragraph conclusion
-- final score and rating
-- key bull case
-- key bear case
-- what would change your mind
+- 一段话结论
+- 最终得分与评级
+- 核心 bull case
+- 核心 bear case
+- 什么条件会改变判断
 
 ### 2. Scorecard Table
-For each dimension, show:
+每个维度至少展示：
 - score
 - weight
 - brief evidence
@@ -159,15 +159,15 @@ For each dimension, show:
 - confidence label: `✅ Verified / ⚠️ Unverified / ❓ Unknown`
 
 ### 3. Valuation Section
-Must include:
+必须包含：
 - current price
 - market cap
 - core valuation multiple(s)
-- valuation vs history if available
-- valuation vs peers if relevant
+- valuation vs history（若可得）
+- valuation vs peers（若相关）
 
 ### 4. Thesis Section
-Must include:
+必须包含：
 - bull case
 - bear case
 - key risk factors
@@ -175,37 +175,37 @@ Must include:
 - current investment phase
 
 ### 5. Final Judgment
-Use one of:
+必须使用以下之一：
 - `Strong Buy`
 - `Buy`
 - `Hold`
 - `Sell`
 
-And explain **why now** or **why not now**.
+并明确解释 **why now** 或 **why not now**。
 
 ---
 
-## Data Rules
+## 数据规则
 
-### Always prefer fresh data
-For stocks / public equities, try to obtain:
-- current price
-- valuation metrics
-- latest quarter / latest annual reference
-- recent major news
+### 优先新数据
+对于股票 / 上市公司，尽量拿到：
+- 当前价格
+- 估值指标
+- 最新季度 / 最新年报参考
+- 近期重大新闻
 
-### Always separate fact from inference
-Use these labels consistently:
+### 事实与推断必须分开
+统一使用：
 - `✅ Verified`
 - `⚠️ Unverified`
 - `❓ Unknown`
 
-### Do not overstate precision
-If data quality is weak, say so clearly.
+### 不要伪装精确度
+如果数据质量一般，必须直接说清楚。
 
 ---
 
-## Recommended Output Shape
+## 推荐输出结构
 
 ```markdown
 # [Company / Ticker] Investment Research
@@ -250,22 +250,22 @@ If data quality is weak, say so clearly.
 
 ## Scope Boundary
 
-Use this skill when:
-- the user wants a one-off report
-- the user asks for a deep dive on a single ticker/company/theme
-- the user wants a structured memo
+适合使用本 skill 的场景：
+- 用户要一份 one-off 研究报告
+- 用户要单一公司 / 单一主题的深度分析
+- 用户要结构化 memo
 
-Do not use this skill as a substitute for:
-- daily/weekly automated monitoring
-- portfolio-wide change detection
-- watchlist automation
+不适合用本 skill 代替的场景：
+- 每日 / 每周自动监控
+- 全组合变化检测
+- watchlist 自动化
 
 ---
 
-## Practical Guidance
+## 实操建议
 
-### For AI / infrastructure names
-Bias attention toward:
+### AI / infrastructure 类标的
+重点关注：
 - `technical_moat`
 - `state_transition`
 - `market_position`
@@ -273,16 +273,16 @@ Bias attention toward:
 - `geopolitics`
 - `supply_chain`
 
-### For cyclical / manufacturing names
-Bias attention toward:
+### 周期 / 制造类标的
+重点关注：
 - `industry_cycle`
 - `valuation_history`
 - `cash_flow`
 - `market_position`
 - `policy`
 
-### For early-stage or speculative names
-Be stricter on:
+### 早期 / 高波动标的
+要更严格地看：
 - `business_model`
 - `cash_flow`
 - `investment_phase`
