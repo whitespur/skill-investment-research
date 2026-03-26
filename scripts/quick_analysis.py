@@ -7,6 +7,7 @@
 import json
 import argparse
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, Any
 
 LATEST_20D = [
@@ -91,23 +92,26 @@ def quick_analysis(symbol: str, name: str, sector: str = "") -> Dict[str, Any]:
     }
 
 
+def default_output_path(symbol: str) -> Path:
+    today = datetime.now().strftime("%Y-%m-%d")
+    return Path("reports") / today / f"{symbol.upper()}-quick-analysis.json"
+
+
 def main():
     parser = argparse.ArgumentParser(description="投资研究快速分析 - 最新20维框架")
     parser.add_argument("--symbol", "-s", required=True, help="股票代码或代币符号")
     parser.add_argument("--name", "-n", required=True, help="公司名称")
     parser.add_argument("--sector", default="", help="行业/板块")
-    parser.add_argument("--output", "-o", help="输出文件路径 (JSON格式)")
+    parser.add_argument("--output", "-o", help="输出文件路径 (JSON格式)，默认保存到 reports/YYYY-MM-DD/")
     args = parser.parse_args()
 
     report = quick_analysis(args.symbol, args.name, args.sector)
+    output_path = Path(args.output) if args.output else default_output_path(args.symbol)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    if args.output:
-        with open(args.output, "w", encoding="utf-8") as file:
-            json.dump(report, file, indent=2, ensure_ascii=False)
-        print(f"✅ 分析框架已保存: {args.output}")
-    else:
-        print(json.dumps(report, indent=2, ensure_ascii=False)[:3000])
-        print("\n... [输出截断，使用 --output 保存完整结果] ...")
+    with open(output_path, "w", encoding="utf-8") as file:
+        json.dump(report, file, indent=2, ensure_ascii=False)
+    print(f"✅ 分析框架已保存: {output_path}")
 
 
 if __name__ == "__main__":

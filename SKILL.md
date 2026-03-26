@@ -16,8 +16,14 @@ description: 面向股票、AI 公司与部分加密资产的结构化投研 ski
 - 估值讨论
 - 多空逻辑 / 风险复盘
 
-这个 skill **只负责分析**。
-文档导出、自动化监控、组合级追踪不属于它的职责范围。
+这个 skill 负责**一次性分析 + 默认落盘交付**。
+自动化监控、组合级追踪不属于它的职责范围。
+
+完成分析后，除非用户明确说“不要保存”或“只口头给我”，否则**必须**把最终 Markdown 报告保存到本地。
+默认路径规则：
+- 默认保存在 `reports/YYYY-MM-DD/<TICKER>-investment-research.md`（相对当前工作目录）
+- 若用户明确指定别的保存位置，则以用户要求为准
+- 若没有用户覆盖指令，不要改成绝对路径
 
 如果任务是**跨组合、连续、自动化**的监控型工作，应使用专门的监控工作流，而不是这个一次性分析 skill。
 
@@ -43,6 +49,8 @@ description: 面向股票、AI 公司与部分加密资产的结构化投研 ski
 - 获取当前价格和估值快照
 - 用 20 维框架评分
 - 提炼投资逻辑、核心风险、当前阶段判断
+- 生成最终 Markdown 报告并默认落盘到 `reports/YYYY-MM-DD/<TICKER>-investment-research.md`
+- 同目录生成 20 维雷达图 PNG，并在报告开头插入图片引用
 
 ### 2. 深度分析
 
@@ -55,6 +63,8 @@ description: 面向股票、AI 公司与部分加密资产的结构化投研 ski
 - 评估估值与历史估值位置
 - 映射风险、催化剂与状态跃迁
 - 生成结构化评分卡与最终评级
+- 生成 20 维雷达图 PNG
+- 保存完整报告到本地，并在回复里明确给出文件路径
 
 ### 3. 主题 / 行业映射
 
@@ -183,6 +193,14 @@ description: 面向股票、AI 公司与部分加密资产的结构化投研 ski
 
 并明确解释 **why now** 或 **why not now**。
 
+### 6. Delivery
+必须完成以下交付动作：
+- 将最终报告写入本地 Markdown 文件
+- 生成对应的 20 维雷达图 PNG，并与报告保存在同一目录
+- 在 Markdown 报告开头插入雷达图引用
+- 在回复中返回一句简短结论 + 报告路径
+- 若估值字段缺失或异常（如 `0.0`、`null`、明显错误），降级标记为 `❓ Unknown` 或 `⚠️ Unverified`，不要伪装精确度
+
 ---
 
 ## 数据规则
@@ -293,4 +311,6 @@ description: 面向股票、AI 公司与部分加密资产的结构化投研 ski
 ## Maintenance Note
 
 This skill reflects the public 20-dimension framework as of `2026-03-25`.
+If the framework changes, update the weights, thresholds, and examples here to match.
+ reflects the public 20-dimension framework as of `2026-03-25`.
 If the framework changes, update the weights, thresholds, and examples here to match.

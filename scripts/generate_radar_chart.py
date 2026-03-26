@@ -64,7 +64,7 @@ LABELS_20 = [
 
 
 def parse_scores(scores_str):
-    return [int(item.strip()) for item in scores_str.split(',')]
+    return [float(item.strip()) for item in scores_str.split(',')]
 
 
 def validate_scores(scores):
@@ -73,6 +73,20 @@ def validate_scores(scores):
     if not all(0 <= score <= 10 for score in scores):
         raise ValueError("All scores must be between 0 and 10")
     return scores
+
+
+def format_score_label(score):
+    if float(score).is_integer():
+        return str(int(score))
+    return f"{score:.1f}"
+
+
+def format_pe_label(pe_ratio):
+    if pe_ratio is None or pe_ratio <= 0:
+        return "N/A"
+    if float(pe_ratio).is_integer():
+        return f"{int(pe_ratio)}x"
+    return f"{pe_ratio:.1f}x"
 
 
 def get_score_color(score):
@@ -114,7 +128,7 @@ def generate_radar_chart(scores, ticker, total_score, rating, price, pe_ratio, o
     for angle, score in zip(angles[:-1], scores):
         color = get_score_color(score)
         ax.annotate(
-            f'{score}',
+            format_score_label(score),
             xy=(angle, score),
             xytext=(angle, score + 0.6),
             fontsize=10,
